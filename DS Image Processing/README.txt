@@ -1,0 +1,1 @@
+This program takes as input a .txt file representing an image, and can perform various image proccesing operations on the image, such as opening, closing, replacing, erosion, dilation, and floodfill. 
