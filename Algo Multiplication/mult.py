@@ -64,11 +64,11 @@ for r in range(10):
 	print "x: " + str(x) + " y: " + str(y)
 
 	start_time = timeit.default_timer()
-	print "gradeschool: " + str(gradeschool(x,y))
+	print "gradeschool:        " + str(gradeschool(x,y))
 	gstimes[r] = timeit.default_timer() - start_time
 
 	start_time = timeit.default_timer()
-	print "recursive: " + str(recur(x,y))
+	print "recursive:          " + str(recur(x,y))
 	rtimes[r] = timeit.default_timer() - start_time
 
 	start_time = timeit.default_timer()
@@ -85,8 +85,8 @@ for r in range(10):
 	rsum += rtimes[r]
 	dcsum += dctimes[r]
 
-print "Gradeschool average: " + str(gssum / 10)
-print "Recursive average: " + str(rsum / 10)
+print "Gradeschool average:        " + str(gssum / 10)
+print "Recursive average:          " + str(rsum / 10)
 print "Divide and conquer average: " + str(dcsum / 10)
 print
 
