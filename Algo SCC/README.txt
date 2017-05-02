@@ -1,0 +1,1 @@
+This program implements Kosaraju's strongly connected components algorithm. It works by performing a depth first search on the reverse graph and determining post values, and then performing a second depth first search to find each SCC.
