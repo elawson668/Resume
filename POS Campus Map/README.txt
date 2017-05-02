@@ -1,0 +1,3 @@
+This program creates a map of the RPI campus and provides the funtionality to find the shortest path between any 2 buildings on campus using Djikstra's algorithm.
+
+The data is read in from two .csv files, and is placed into a graph made up of nodes and edges, with each edge having a distance assigned to it. Djikstra's algorithm is used to calculate the shortest path between the two buildings entered by the user. 
