@@ -1,0 +1,59 @@
+#!/bin/bash
+#
+#    Copyright 2016 Daniel Alder, https://github.com/daald
+#
+#    This file is part of dpkg-licenses.
+#
+#    dpkg-licenses was written by Daniel Alder, https://github.com/daald
+#
+#    dpkg-licenses is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    dpkg-licenses is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with dpkg-licenses.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Modified by Eric Lawson, 2018
+
+echo "Gathering .jar files" >&2
+rm -rf Jars
+mkdir Jars
+
+SCRIPTLIB=$(dirname $(readlink -f "$0"))/lib/
+test -d "$SCRIPTLIB"
+
+format='%-40s %-60s %s\n'
+
+find -L Ext -name "*.jar" -print0 | xargs -0 -I {} cp {} Jars 2>/dev/null
+
+echo "Listing licenses for each .jar file" >&2
+rm -rf temp
+mkdir temp
+for file in ./Jars/*.jar; do
+	rm -rf temp/*
+	unzip -qq -o "$file" -d temp
+	chmod -R +rwx temp
+
+	tmp="${file##*\/}"
+	package="${tmp%.*}"
+
+	license=
+	for method in "$SCRIPTLIB"/reader*; do
+		[ -f "$method" ] || continue
+		license=$("$method" "$package")
+		[ $? -eq 0 ] || exit 1
+		[ -n "$license" ] || continue
+		license=$(echo "$license" | tr '\n' ':' | sed -r -e 's/ +/ /g' -e 's/^ +//' -e 's/ +$//')
+    	[ -z "$license" ] || break
+  	done
+  	[ -n "$license" ] || license="unknown"
+
+	printf "$format" "${package:0:40}" "$license"
+
+done

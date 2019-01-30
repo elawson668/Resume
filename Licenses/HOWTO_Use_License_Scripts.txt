@@ -1,0 +1,28 @@
+Eric Lawson
+2018-08-03
+
+LINUX PACKAGE LICENSES: in Licenses/Image directory
+
+- This program must be run on the machine whose licenses you are trying to categorize. 
+
+- To run this program: ./run.sh
+- To ensure scripts run properly, use the clean.sh script before: ./clean.sh
+
+- This program uses dpkg to get a list of all installed packages, and looks for their licenses in /usr/share/doc. 
+- Output is stored in out.txt, and a more interactive version is stored in out.html.
+
+JAVA LICENSES: in Licenses/Java directory
+
+- This program can be run on any machine.
+
+- To run: ./run.sh
+- To ensure scripts run properly, use the clean.sh script before: ./clean.sh
+
+- This program looks for all the .jar files in the Ext repository, opens them, and find their licenses.
+- Output is stored in out.txt, and a more interactive version is stored in out.html.
+
+TO RUN BOTH:
+
+- To run: ./runAll.sh
+- To clean: ./cleanAll.sh
+
